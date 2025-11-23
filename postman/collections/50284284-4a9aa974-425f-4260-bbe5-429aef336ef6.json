@@ -161,7 +161,8 @@
 								"posts",
 								""
 							]
-						}
+						},
+						"description": "## Create Post\n\nThis endpoint creates a new post in the social app's activity feed.\n\n### Request Body\n\nThe request requires a JSON body with the following structure:\n\n```json\n{\n  \"text\": \"Your post content here\"\n}\n```\n\n**Required Fields:**\n- `text` (string): The content of the post to be created in the activity feed\n\n### Authentication\n\nThis endpoint requires authentication using a bearer token. The `{{token}}` variable should be set in your environment with a valid authentication token.\n\n### Usage Notes\n\n- Ensure the `{{base_url}}` environment variable is set to your API's base URL\n- The `{{token}}` variable must contain a valid authentication token for the user creating the post\n- The post text should be provided as a string value in the request body"
 					},
 					"response": []
 				},
