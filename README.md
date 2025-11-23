@@ -8,7 +8,7 @@ Live Deployment: https://inkle-social-assignment.onrender.com/api/register/
 
 DOCS API Documentation: https://documenter.getpostman.com/view/50284284/2sB3dHVsSY
 
-📋 Project Requirements Checklist
+**Project Requirements Checklist**
 This API fulfills all requirements specified in the assignment:
 
 User Auth: Signup, Login (JWT), and Profile management.
@@ -29,11 +29,6 @@ Automated Feed (Signals): I implemented the Observer Pattern using Django Signal
 Polymorphic Relationships: The Activity Feed uses Generic Foreign Keys. This allows a single Activity table to link dynamically to different types of objects (a User or a Post) without creating messy database schemas.
 
 Privacy by Design (Blocking): Blocking is handled at the QuerySet level. By overriding the get_queryset method, I ensure that if User A blocks User B, User B’s content is filtered out of the API response immediately. This is more secure than filtering in the frontend or serializer.
-
-🛠️ Local Setup Guide
-If you wish to run this locally instead of using the live link, follow these steps:
-
-1. Clone the Repository
 
 Bash
 
