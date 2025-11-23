@@ -1,10 +1,9 @@
 Social Activity Feed API
-A robust, production-ready REST API built with Django and Django REST Framework. This project implements a social network backend featuring user management, an automated activity feed, and role-based blocking and permissions.
+REST API built with Django and Django REST Framework. This project implements a social network backend featuring user management, an automated activity feed, and role-based blocking and permissions.
 
-🚀 Submission Links (Key Deliverables)
+Submission Links:
 📂 Source Code: https://github.com/lavdeep2332/inkle-Social-Assignment
-
-🌐 Live Deployment: https://inkle-social-assignment.onrender.com/api/register/
+Live Deployment: https://inkle-social-assignment.onrender.com/api/register/
 
 DOCS API Documentation: https://documenter.getpostman.com/view/50284284/2sB3dHVsSY
 
