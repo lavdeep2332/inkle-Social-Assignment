@@ -1,0 +1,436 @@
+{
+	"info": {
+		"_postman_id": "50284284-4a9aa974-425f-4260-bbe5-429aef336ef6",
+		"name": "SocialProject",
+		"description": "This API handles user management, social interactions (follow/block), and an activity feed using Django Signals.\n\n**How to use:**\n\n1. Register a new user via `/api/register/`.\n    \n2. Login via `/api/token/` to get your Access Token.\n    \n3. The token is automatically applied to other requests if you use the \"Tests\" script provided.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"id": "50284284-bef8b309-c5cc-4c3e-83ec-c6319e271851",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"victor2\",\r\n    \"email\": \"victor2@test.com\",\r\n    \"password\": \"password123\",\r\n    \"role\": \"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/register/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "64ef9663-824e-49f3-a48e-61867e30f737",
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"if (jsonData.access) {\r",
+									"    pm.environment.set(\"token\", jsonData.access);\r",
+									"    console.log(\"Token updated!\");\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "50284284-a1504d93-3a3d-49ad-a394-465dcff78e79",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"victor2\",\r\n    \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/token/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "50284284-d42e0746-443f-4591-9728-f97e5894052b",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "fac9094e-037a-433e-abff-d4e2cb6c92f0",
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b3030bbf-4a30-4f03-9910-cb59c4e6269a",
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Content",
+			"item": [
+				{
+					"name": "createPost",
+					"id": "50284284-a2a93c90-0bd9-433c-8343-2a7f91970d65",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"This is a test post for the activity feed by bob.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/posts/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								""
+							]
+						},
+						"description": "## Create Post\n\nThis endpoint creates a new post in the social app's activity feed.\n\n### Request Body\n\nThe request requires a JSON body with the following structure:\n\n```json\n{\n  \"text\": \"Your post content here\"\n}\n```\n\n**Required Fields:**\n- `text` (string): The content of the post to be created in the activity feed\n\n### Authentication\n\nThis endpoint requires authentication using a bearer token. The `{{token}}` variable should be set in your environment with a valid authentication token.\n\n### Usage Notes\n\n- Ensure the `{{base_url}}` environment variable is set to your API's base URL\n- The `{{token}}` variable must contain a valid authentication token for the user creating the post\n- The post text should be provided as a string value in the request body"
+					},
+					"response": []
+				},
+				{
+					"name": "Likes",
+					"id": "50284284-115f12ef-6c64-42de-8509-66edb41f6527",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"post\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/likes/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"likes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "viewAllPosts",
+					"event": [
+						{
+							"id": "47914733-9e10-4260-9009-3d6dde248b6b",
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"// Test: Successful posts retrieval",
+									"pm.test(\"Status code is 200 OK\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 3000ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);",
+									"});",
+									"",
+									"pm.test(\"Response has JSON content type\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"// Test: Response is an array",
+									"pm.test(\"Response is an array of posts\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an(\"array\");",
+									"});",
+									"",
+									"// Test: Post structure validation",
+									"if (pm.response.json().length > 0) {",
+									"    pm.test(\"Each post has required fields\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        jsonData.forEach(function(post) {",
+									"            pm.expect(post).to.have.property(\"id\");",
+									"            pm.expect(post).to.have.property(\"content\");",
+									"            pm.expect(post).to.have.property(\"author\");",
+									"            pm.expect(post).to.have.property(\"created_at\");",
+									"        });",
+									"    });",
+									"",
+									"    pm.test(\"Post fields have correct data types\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        jsonData.forEach(function(post) {",
+									"            pm.expect(post.id).to.be.a(\"number\");",
+									"            pm.expect(post.content).to.be.a(\"string\");",
+									"            pm.expect(post.author).to.be.a(\"number\");",
+									"            pm.expect(post.created_at).to.be.a(\"string\");",
+									"        });",
+									"    });",
+									"",
+									"    pm.test(\"Post content is not empty\", function () {",
+									"        var jsonData = pm.response.json();",
+									"        jsonData.forEach(function(post) {",
+									"            pm.expect(post.content).to.have.lengthOf.above(0);",
+									"        });",
+									"    });",
+									"}",
+									"",
+									"// Test: Authentication required",
+									"if (pm.response.code === 401) {",
+									"    pm.test(\"Unauthorized response for missing authentication\", function () {",
+									"        pm.expect(pm.response.code).to.equal(401);",
+									"    });",
+									"}"
+								]
+							}
+						}
+					],
+					"id": "50284284-9514a1cb-ff21-4f45-adb5-fb4febe99956",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/posts/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "50284284-7ee28f9f-ac5f-4bfd-9d2a-65d018079a52"
+		},
+		{
+			"name": "Social",
+			"item": [
+				{
+					"name": "followUser",
+					"id": "50284284-df37e461-f337-49d3-b539-a0ccff8f17b8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"following\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/follows/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"follows",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "blockUser",
+					"id": "50284284-15739e51-a88d-4b6e-a2cf-6f0eb3632717",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"blocked\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/blocks/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"blocks",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "50284284-1074627e-abc4-404d-ac80-711a65050b64"
+		},
+		{
+			"name": "Feed",
+			"item": [
+				{
+					"name": "ActivityFeed",
+					"id": "50284284-db3611ad-38c9-4b8b-8bc6-8e113c71a270",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/feed/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"feed",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "50284284-2aef0c85-25ba-47de-9670-d5d65f3ed389"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "25bcc63c-32f0-4263-8a4c-61fe7ae68406",
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b930067b-8ce8-43ae-8d23-53f952f76474",
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": ""
+		}
+	]
+}
