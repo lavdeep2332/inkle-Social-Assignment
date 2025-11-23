@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 # Import Views
-from accounts.views import RegisterView
+from accounts.views import RegisterView, UserViewSet
 from content.views import PostViewSet, LikeViewSet
 from social.views import FollowViewSet, BlockViewSet
 from feed.views import FeedView
@@ -15,7 +15,7 @@ router.register(r'posts', PostViewSet, basename='post')
 router.register(r'likes', LikeViewSet, basename='like')
 router.register(r'follows', FollowViewSet, basename='follow')
 router.register(r'blocks', BlockViewSet, basename='block')
-
+router.register(r'users', UserViewSet, basename='user')
 urlpatterns = [
     path('admin/', admin.site.urls),
     
