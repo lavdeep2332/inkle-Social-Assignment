@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "50284284-4a9aa974-425f-4260-bbe5-429aef336ef6",
 		"name": "SocialProject",
+		"description": "This API handles user management, social interactions (follow/block), and an activity feed using Django Signals.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
