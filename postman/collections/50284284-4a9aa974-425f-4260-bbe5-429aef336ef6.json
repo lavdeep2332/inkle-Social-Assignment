@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "50284284-4a9aa974-425f-4260-bbe5-429aef336ef6",
 		"name": "SocialProject",
-		"description": "This API handles user management, social interactions (follow/block), and an activity feed using Django Signals.  \n  \nStartFragment\n\n**How to use:**\n\n1. Register a new user via `/api/register/`.\n    \n2. Login via `/api/token/` to get your Access Token.\n    \n3. The token is automatically applied to other requests if you use the \"Tests\" script provided.\n    \n\nEndFragment",
+		"description": "This API handles user management, social interactions (follow/block), and an activity feed using Django Signals.\n\n**How to use:**\n\n1. Register a new user via `/api/register/`.\n    \n2. Login via `/api/token/` to get your Access Token.\n    \n3. The token is automatically applied to other requests if you use the \"Tests\" script provided.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
