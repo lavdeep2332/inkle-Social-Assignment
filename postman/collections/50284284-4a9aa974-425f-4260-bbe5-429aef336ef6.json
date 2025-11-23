@@ -19,7 +19,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"alice\",\r\n    \"email\": \"alice@test.com\",\r\n    \"password\": \"password123\",\r\n    \"role\": \"user\"\r\n}",
+							"raw": "{\r\n    \"username\": \"victor2\",\r\n    \"email\": \"victor2@test.com\",\r\n    \"password\": \"password123\",\r\n    \"role\": \"user\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -143,7 +143,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"text\": \"This is a test post for the activity feed.\"\r\n}",
+							"raw": "{\r\n    \"text\": \"This is a test post for the activity feed by bob.\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
